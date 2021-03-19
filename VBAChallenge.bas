@@ -113,15 +113,14 @@ Sub stonk_compiler():
     'Greatest Total Volume
     Dim BonusTicker As String
     Dim BonusVolume As LongLong
-    Dim GreatInc As Double
-    Dim GreatDec As Double
+    Dim GreatestIncrease As Double
+    Dim GreatestDecrease As Double
     Dim BonusLastRow As Integer
     
     'Set Initial Values
     BonusVolume = 0
-    GreatInc = 0
-    GreatDec = 0
-    BonusLastRow = 0
+    GreatestIncrease = 0
+    GreatestDecrease = 0
     
     'Create Headers and Bold the text
     ws.Range("N2").Value = "Greatest % Increase"
@@ -136,19 +135,57 @@ Sub stonk_compiler():
     ws.Range("P1").Font.Bold = True
     
     'Find Last Row of Summary Table
-    'BonusLastRow = ws.Range("I" & Rows.Count).End(xlUp).Row
+        '--------------------------Experimental Code--------------------------------
+        '----------BonusLastRow = ws.Range("I" & Rows.Count).End(xlUp).Row----------
+        '---------------------------------------------------------------------------
+    BonusLastRow = ws.Cells(Rows.Count, 9).End(xlUp).Row
     
-    'Application.WorksheetFunction.Max(range("Data!A1:A7"))
+    'Format O2:P4 into the correct format
+    ws.Range("P2:P3").NumberFormat = "0.00%"
     
-    'Cells for Greatest%Inc Greatest%Dec and GreatestVolume
-    ws.Range("P2").Value = Application.WorksheetFunction.Max(Range("Data!K2:K & BonusLastRow"))
+    'Iterate through every row of the compiled data table to find Ticker with Greatest: % Increase, % Decrease, and Stock Volume
+    'Use if statements to compare cell data of each stock ticker to find the greatest of each category
+    For i = 2 To BonusLastRow
     
-    ws.Range("P3").Value = Application.WorksheetFunction.Min(Range("Data!K2:K" & BonusLastRow))
-    
-    ws.Range("P4").Value = Application.WorksheetFunction.Max(Range("Data!L2:L" & BonusLastRow))
-    
-    
+        If ws.Cells(i, 11).Value > GreatestIncrease Then
+            GreatestIncrease = ws.Cells(i, 11).Value
+            
+            'Cell P2 will keep updating until the last iteration with the current max value.
+            'At last iteration, P2 will have the data of the max of the all the tickers
+            ws.Range("P2").Value = GreatestIncrease
+            
+            'Pulling Ticker name for the max value stock ticker and writing it into Cell O2
+            ws.Range("O2").Value = ws.Cells(i, 9).Value
+            
+        'Using same conditional to look for min while looking for max
+        ElseIf ws.Cells(i, 11).Value < GreatestDecrease Then
+            
+            GreatestDecreae = ws.Cells(i, 11).Value
+            
+            ws.Range("P3").Value = GreatestDecrease
+            
+            ws.Range("O3").Value = ws.Cells(i, 9).Value
         
+        End If
+        
+        'Using separate loop to find greatest stock volume
+        If ws.Cells(i, 12).Value > BonusVolume Then
+        
+            BonusVolume = ws.Cells(i, 12).Value
+            
+            ws.Range("P4").Value = BonusVolume
+            
+            ws.Range("O4").Value = ws.Cells(i, 9).Value
+        End If
+    
+    Next i
+        '-----------------------Experimental Code--------------------------------------------------
+        'Cells(Count, 4)=Application.WorksheetFunction.Max(Range(Cells(m, 1),Cells(n, 1)))
+        'Application.WorksheetFunction.Max(range("Data!A1:A7"))
+        'ws.Range("P2").Value = Application.WorksheetFunction.Max(Range("Data!K2:K & BonusLastRow"))
+        'ws.Range("P3").Value = Application.WorksheetFunction.Min(Range("Data!K2:K" & BonusLastRow))
+        'ws.Range("P4").Value = Application.WorksheetFunction.Max(Range("Data!L2:L" & BonusLastRow))
+        '-------------------------------------------------------------------------------------------
     Next ws
     
 End Sub
