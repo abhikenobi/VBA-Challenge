@@ -10,7 +10,7 @@ ___
 
 Part 1 of the Homework required you to create a run a VBA script using the alphabetical_testing.xlsm as a test-subject file, as it contains the same type of numerical stockmarket data as the actual file, but the quantity was reduced significantly in order to quickly run the script and find/troubleshoot bugs.
 
-**Requirements for the VBA script**
+#### Requirements for the VBA script:
 ___
     *Be able to run through all Worksheets in the file automatically rather than
     manually running the script for each separate Worksheet
