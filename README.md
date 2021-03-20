@@ -12,14 +12,19 @@ Part 1 of the Homework required you to create a run a VBA script using the alpha
 
 **Requirements for the VBA script**
 ___
-    -Be able to run through all Worksheets in the file automatically rather than manually running the script for each separate Worksheet
-    -After testing on the test-subject file, have the code be able to run in the actual file within 3-5 min
-    -Have the script be able to loop through all the data, compile, and then output:
+    *Be able to run through all Worksheets in the file automatically rather than
+    manually running the script for each separate Worksheet
+    *After testing on the test-subject file, have the code be able to run in the
+    actual file within 3-5 min
+    *Have the script be able to loop through all the data, compile, and then output:
         1. The ticker symbol of each stock
-        2. Yearly change in stock price for that stock by calculating the difference between the opening price at the beginning of a given year and the closing price at the end of that year
-        3. The percent change from the opening price at the beginning of a year to the closing price at the end of that year.
+        2. Yearly change in stock price for that stock by calculating the difference
+        between the opening price at the beginning of a given year and the closing price at the end of that year
+        3. The percent change from the opening price at the beginning of a year to
+        the closing price at the end of that year.
         4. The total stock volume of that stock for each year.
-    -Conditional formatting within the script to recolor cells containing the Yearly Change data dependent on if the stock price rose or fell at the end of the year vs. the beginning
+    *Conditional formatting within the script to recolor cells containing the Yearly Change
+    data dependent on if the stock price rose or fell at the end of the year vs. the beginning
     
 ### Part 2: Bonus
 
